@@ -32,6 +32,11 @@ class Login extends React.Component {
     await dispatch(fetchTokenThunk(email, user));
   }
 
+  handleSettings = () => {
+    const { history } = this.props;
+    history.push('/settings');
+  }
+
   validateEmail() {
     const { email } = this.state;
     const re = /\S+@\S+\.\S+/;
@@ -77,6 +82,13 @@ class Login extends React.Component {
             onClick={ this.handleClick }
           >
             Play
+          </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ this.handleSettings }
+          >
+            Config
           </button>
         </form>
       </div>
