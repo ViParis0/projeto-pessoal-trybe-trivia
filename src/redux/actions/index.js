@@ -22,7 +22,7 @@ export const fetchTokenThunk = (email, user) => async (dispatch) => {
   const returnFetch = await fetch('https://opentdb.com/api_token.php?command=request');
   const data = await returnFetch.json();
   localStorage.setItem('token', data.token);
-  dispatch(getUserToken(data.token));
+  dispatch(getUserToken(data));
   dispatch(addUserData(email, user));
 };
 
