@@ -15,7 +15,7 @@ class Game extends Component {
   }
 
   render() {
-    const { history, responseCode } = this.props;
+    const { history, responseCode, questions } = this.props;
     // const { index } = this.state;
     if (responseCode !== 0) {
       localStorage.removeItem('token');
@@ -24,6 +24,7 @@ class Game extends Component {
     return (
       <div>
         <Header />
+        <h4>{ questions[0] && questions[0].question }</h4>
       </div>
     );
   }
