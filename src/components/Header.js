@@ -16,6 +16,5 @@
 //         </header>
 //       );
 //     }
-// 
 
 //   export default Head
