@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import { fetchTokenThunk } from '../actions';
+import { fetchTokenThunk } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -27,9 +26,10 @@ class Login extends React.Component {
   }
 
   handleClick = async () => {
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
     const { user, email } = this.state;
     await dispatch(fetchTokenThunk(email, user));
+    history.push('/game');
   }
 
   handleSettings = () => {
@@ -45,11 +45,9 @@ class Login extends React.Component {
 
   render() {
     const { email, user, isDisabled } = this.state;
-    const { user: { token } } = this.props;
-    if (token) {
-      localStorage.setItem('token', token);
-      return <Redirect to="/game" />;
-    }
+    // if (token) {
+    //   return <Redirect to="/game" />;
+    // }
     return (
       <div>
         <form>

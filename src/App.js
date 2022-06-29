@@ -10,8 +10,8 @@ export default class App extends Component {
       <main>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/game" component={ Game } />
-          <Route path="/settings" component={ Settings } />
+          <Route exact path="/game" component={ Game } />
+          <Route exact path="/settings" component={ Settings } />
         </Switch>
       </main>
     );
