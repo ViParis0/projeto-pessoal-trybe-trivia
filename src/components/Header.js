@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import fetchApi from './Gravata';
 import md5 from 'crypto-js/md5';
 
 class Header extends Component {
@@ -16,6 +15,7 @@ class Header extends Component {
   }
 
   render() {
+    const { user } = this.props;
     const { avatar } = this.state;
     return (
       <header>
@@ -25,20 +25,21 @@ class Header extends Component {
           alt="profile"
           data-testid="header-profile-picture"
         />
-        <h1 data-testid="header-player-name"> </h1>
+        <h1 data-testid="header-player-name">{user}</h1>
         <span>Score: </span>
-        <span id="score" data-testid="header-scores">0</span>
+        <span id="score" data-testid="header-score">0</span>
       </header>
     );
   }
 }
 
 Header.propTypes = {
+  user: PropTypes.string,
   email: PropTypes.string,
-
 }.isRequired;
 
 const mapStateToProps = (state) => ({
+  user: state.user.user,
   email: state.user.email,
 });
 

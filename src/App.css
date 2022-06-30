@@ -61,3 +61,18 @@ body {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.correct {
+  background-color: #0d6efd;
+  border: 3px solid rgb(6, 240, 15);
+  color: white;
+}
+
+
+.incorrects {
+  background-color: #0d6efd;
+  border: 3px solid red;
+  color: white;
+}
+
+
