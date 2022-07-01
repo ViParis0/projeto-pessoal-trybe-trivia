@@ -11,6 +11,7 @@ class Game extends Component {
     answers: [],
     shouldRender: false,
     showColor: false,
+    countDown: 30,
 
   }
 
@@ -18,8 +19,10 @@ class Game extends Component {
 
   async componentDidMount() {
     const { dispatch, token } = this.props;
+    const intervalMs = 1000;
     await dispatch(fetchQuestionsThunk(token));
     this.setState({ shouldRender: true });
+    setInterval(this.handleCountdown(), intervalMs);
   }
 
   randomOrder = (questions) => {
@@ -45,9 +48,13 @@ class Game extends Component {
     this.setState({ showColor: true });
   }
 
+  handleCountdown = () => {
+    this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
+  }
+
   render() {
     const { history, token, questions } = this.props;
-    const { index, answers, shouldRender, showColor } = this.state;
+    const { index, answers, shouldRender, showColor, countDown } = this.state;
     if (token === 'INVALID_TOKEN') {
       localStorage.removeItem('token');
       history.push('/');
@@ -58,6 +65,7 @@ class Game extends Component {
     return (
       <div>
         <Header />
+        <p>{countDown}</p>
         <h4 data-testid="question-category">
           {questions[index] && questions[index].category}
         </h4>
@@ -73,8 +81,7 @@ class Game extends Component {
                 data-testid={ quest.test }
                 className={ showColor ? quest.class : 'none' }
                 onClick={ this.handleClick }
-                // style={ showColor ? { border: '3px solid rgb(6, 240, 15)' }
-                //   : { border: '3px solid red' } }
+                disabled={ showColor }
               >
                 {quest.answer}
               </button>
