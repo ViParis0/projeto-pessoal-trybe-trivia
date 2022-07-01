@@ -1,6 +1,7 @@
 export const SEND_USER_DATA = 'SEND_USER_DATA';
 export const SEND_TOKEN = 'SEND_TOKEN';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const SEND_SCORE = 'SEND_SCORE';
 
 export const addUserData = (email, user) => ({
   type: SEND_USER_DATA,
@@ -16,6 +17,11 @@ export const getUserToken = (token) => ({
 export const getQuestions = (questions) => ({
   type: GET_QUESTIONS,
   payload: questions,
+});
+
+export const sendScore = (score) => ({
+  type: SEND_SCORE,
+  payload: score,
 });
 
 export const fetchTokenThunk = (email, user) => async (dispatch) => {

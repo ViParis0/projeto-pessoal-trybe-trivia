@@ -1,4 +1,4 @@
-import { GET_QUESTIONS } from '../actions';
+import { GET_QUESTIONS, SEND_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -14,6 +14,10 @@ const gameReducer = (state = INITIAL_STATE, action) => {
   case GET_QUESTIONS:
     return { ...state,
       questions: action.payload,
+    };
+  case SEND_SCORE:
+    return { ...state,
+      score: action.payload,
     };
   default:
     return state;
