@@ -4,18 +4,17 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 // import { fetchQuestionsThunk } from '../redux/actions';
 import '../App.css';
-import { fetchQuestionsThunk } from '../redux/actions';
+// import { fetchQuestionsThunk } from '../redux/actions';
 import Question from '../components/Question';
 
 class Game extends Component {
   state = {
     countDown: 30,
-    countZero: false,
+    isClicked: false,
   }
 
   async componentDidMount() {
-    const { dispatch, token } = this.props;
-    await dispatch(fetchQuestionsThunk(token));
+    // const { dispatch, token } = this.props;
     this.setIntervalFunc();
   }
 
@@ -23,18 +22,22 @@ class Game extends Component {
     const intervalMs = 1000;
     const setIntervalId = setInterval(() => this.setState((prevState) => ({
       countDown: prevState.countDown - 1 }), () => {
-      const { countDown } = this.state;
+      const { countDown, isClicked } = this.state;
+      if (isClicked) {
+        clearInterval(setIntervalId);
+      }
       if (countDown === 0) {
         console.log('entrou');
-        this.setState({ countZero: true });
         clearInterval(setIntervalId);
       }
     }), intervalMs);
   }
 
+  handleTimer = () => this.setState({ isClicked: true })
+
   render() {
-    const { history, token, questions } = this.props;
-    const { countDown, countZero } = this.state;
+    const { history, token } = this.props;
+    const { countDown } = this.state;
     if (token === 'INVALID_TOKEN') {
       localStorage.removeItem('token');
       history.push('/');
@@ -43,7 +46,7 @@ class Game extends Component {
       <div>
         <Header />
         <p>{countDown}</p>
-        <Question counter={ countZero } questions={ questions } />
+        <Question counter={ countDown } handleTimer={ this.handleTimer } />
       </div>
     );
   }

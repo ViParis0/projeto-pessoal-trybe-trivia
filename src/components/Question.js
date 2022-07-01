@@ -1,24 +1,25 @@
 import PropTypes, { arrayOf } from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchQuestionsThunk } from '../redux/actions';
 
 class Question extends Component {
-  // PERGUNTAS_RANDOM = []; // array que vai ficar com as perguntas embaralhadas
-
   state = {
     index: 0,
     showColor: false,
     answers: [],
+    payload: [],
   }
 
-  componentDidMount() {
-    const { questions } = this.props;
-    console.log(questions, 'props');
+  async componentDidMount() {
+    const { token, dispatch } = this.props;
+    this.result = await dispatch(fetchQuestionsThunk(token));
+    this.setState({ payload: this.result.payload });
     this.randomize();
   }
 
   randomize = () => {
-    const { questions } = this.props;
-    // this.PERGUNTAS_RANDOM = [];
+    const { payload: questions } = this.result;
     if (questions.length === 0) return;
     const { index } = this.state;
     const question = questions[index];
@@ -34,24 +35,24 @@ class Question extends Component {
   }
 
   handleClick = () => {
+    const { handleTimer } = this.props;
     this.setState({ showColor: true });
+    handleTimer();
   }
 
   render() {
-    const { questions } = this.props;
-    const { index, showColor, answers } = this.state;
-    // const randomAnswers = this.randomize();
-    // if (counter === 0) {
-    //   this.setState({ showColor: true });
-    // }
+    const { counter } = this.props;
+    const { index, showColor, answers, payload } = this.state;
+    if (counter === 0 && !showColor) {
+      this.setState({ showColor: true });
+    }
     return (
       <div>
-        {console.log(questions)}
         <h4 data-testid="question-category">
-          {questions[index] && questions[index].category}
+          {payload[index] && payload[index].category}
         </h4>
         <h4 data-testid="question-text">
-          {questions[index] && questions[index].question}
+          {payload[index] && payload[index].question}
         </h4>
         <div data-testid="answer-options">
           {answers.length && answers.map((quest, i) => (
@@ -74,8 +75,12 @@ class Question extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  token: state.user.token,
+});
+
 Question.propTypes = {
   questions: PropTypes.shape({ questions: arrayOf(PropTypes.object) }),
 }.isRequired;
 
-export default Question;
+export default connect(mapStateToProps)(Question);
