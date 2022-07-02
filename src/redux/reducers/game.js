@@ -3,7 +3,7 @@ import { GET_QUESTIONS, SEND_SCORE } from '../actions';
 const INITIAL_STATE = {
   name: '',
   assertions: 0,
-  score: '',
+  score: 0,
   gravatarEmail: '',
   questions: [],
 

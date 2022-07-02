@@ -3,6 +3,9 @@ export const SEND_TOKEN = 'SEND_TOKEN';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const SEND_SCORE = 'SEND_SCORE';
 
+const SUM_POINTS = 10;
+const HARD_MULTIPLYER = 3;
+
 export const addUserData = (email, user) => ({
   type: SEND_USER_DATA,
   email,
@@ -23,6 +26,22 @@ export const sendScore = (score) => ({
   type: SEND_SCORE,
   payload: score,
 });
+
+export const sendScoreThunk = (timer, dificult) => (dispatch) => {
+  switch (dificult) {
+  case 'easy':
+    dispatch(sendScore(SUM_POINTS + (timer * 1)));
+    break;
+  case 'medium':
+    dispatch(sendScore(SUM_POINTS + (timer * 2)));
+    break;
+  case 'hard':
+    (sendScore(SUM_POINTS + (timer * HARD_MULTIPLYER)));
+    break;
+  default:
+    break;
+  }
+};
 
 export const fetchTokenThunk = (email, user) => async (dispatch) => {
   const returnFetch = await fetch('https://opentdb.com/api_token.php?command=request');

@@ -1,8 +1,7 @@
 import PropTypes, { arrayOf } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { fetchQuestionsThunk } from '../redux/actions';
+import { fetchQuestionsThunk, sendScoreThunk } from '../redux/actions';
 
 class Question extends Component {
   state = {
@@ -35,27 +34,29 @@ class Question extends Component {
     // return this.PERGUNTAS_RANDOM;
   }
 
-  redirect = () => <Redirect to="/feedback" />
-
   handleNext = () => {
     const { index } = this.state;
-    const { setIntervalFunc } = this.props;
-    const questionsLength = 5;
+    const { setIntervalFunc, history } = this.props;
+    const questionsLength = 4;
     if (index === questionsLength) {
-      this.redirect();
+      history.push('/feedback');
     }
     setIntervalFunc();
     this.setState((prevState) => ({
       index: prevState.index + 1,
       showColor: false,
-    }), console.log(this.props));
+    }));
     this.randomize();
   }
 
-  handleClick = () => {
-    const { handleTimer } = this.props;
+  handleClick = (answer) => {
+    const { handleTimer, counter, dispatch } = this.props;
+    const { index, payload } = this.state;
     this.setState({ showColor: true });
     handleTimer();
+    if (answer === 'correct') {
+      dispatch(sendScoreThunk(counter, payload[index].difficulty));
+    }
   }
 
   render() {
@@ -80,7 +81,7 @@ class Question extends Component {
                 type="button"
                 data-testid={ quest.test }
                 className={ showColor ? quest.class : 'none' }
-                onClick={ this.handleClick }
+                onClick={ () => this.handleClick(quest.class) }
                 disabled={ showColor }
               >
                 {quest.answer}
