@@ -31,6 +31,7 @@ class Game extends Component {
         clearInterval(setIntervalId);
       }
     }), intervalMs);
+    this.setState({ isClicked: false, countDown: 30 });
   }
 
   handleTimer = () => this.setState({ isClicked: true })
@@ -46,7 +47,11 @@ class Game extends Component {
       <div>
         <Header />
         <p>{countDown}</p>
-        <Question counter={ countDown } handleTimer={ this.handleTimer } />
+        <Question
+          counter={ countDown }
+          handleTimer={ this.handleTimer }
+          setIntervalFunc={ this.setIntervalFunc }
+        />
       </div>
     );
   }

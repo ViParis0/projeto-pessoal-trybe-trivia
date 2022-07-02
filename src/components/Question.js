@@ -1,6 +1,7 @@
 import PropTypes, { arrayOf } from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { fetchQuestionsThunk } from '../redux/actions';
 
 class Question extends Component {
@@ -32,6 +33,23 @@ class Question extends Component {
     // this.PERGUNTAS_RANDOM = perguntas;
     this.setState({ answers: perguntas });
     // return this.PERGUNTAS_RANDOM;
+  }
+
+  redirect = () => <Redirect to="/feedback" />
+
+  handleNext = () => {
+    const { index } = this.state;
+    const { setIntervalFunc } = this.props;
+    const questionsLength = 5;
+    if (index === questionsLength) {
+      this.redirect();
+    }
+    setIntervalFunc();
+    this.setState((prevState) => ({
+      index: prevState.index + 1,
+      showColor: false,
+    }), console.log(this.props));
+    this.randomize();
   }
 
   handleClick = () => {
@@ -69,6 +87,17 @@ class Question extends Component {
               </button>
             )
           ))}
+          { showColor
+           && (
+             <button
+               onClick={ this.handleNext }
+               type="button"
+               data-testid="btn-next"
+             >
+               Next
+             </button>
+           )}
+
         </div>
       </div>
     );
