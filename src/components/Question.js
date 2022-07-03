@@ -17,6 +17,7 @@ class Question extends Component {
     this.setState({ payload: this.result.payload });
     this.randomize();
   }
+  // teste
 
   randomize = () => {
     const { payload: questions } = this.state;
