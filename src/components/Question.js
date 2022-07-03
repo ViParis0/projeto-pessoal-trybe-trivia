@@ -19,7 +19,7 @@ class Question extends Component {
   }
 
   randomize = () => {
-    const { payload: questions } = this.result;
+    const { payload: questions } = this.state;
     if (questions.length === 0) return;
     const { index } = this.state;
     const question = questions[index];
@@ -29,9 +29,7 @@ class Question extends Component {
       test: 'correct-answer',
       class: 'correct' }, ...incorrects];
     perguntas.sort(() => Math.round(Math.random()) * 2 - 1);
-    // this.PERGUNTAS_RANDOM = perguntas;
     this.setState({ answers: perguntas });
-    // return this.PERGUNTAS_RANDOM;
   }
 
   handleNext = () => {
@@ -45,8 +43,7 @@ class Question extends Component {
     this.setState((prevState) => ({
       index: prevState.index + 1,
       showColor: false,
-    }));
-    this.randomize();
+    }), this.randomize);
   }
 
   handleClick = (answer) => {

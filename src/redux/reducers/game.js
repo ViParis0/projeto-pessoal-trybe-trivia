@@ -17,7 +17,7 @@ const gameReducer = (state = INITIAL_STATE, action) => {
     };
   case SEND_SCORE:
     return { ...state,
-      score: action.payload,
+      score: state.score + action.payload,
     };
   default:
     return state;

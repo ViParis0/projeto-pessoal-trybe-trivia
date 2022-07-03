@@ -4,7 +4,7 @@ export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const SEND_SCORE = 'SEND_SCORE';
 
 const SUM_POINTS = 10;
-const HARD_MULTIPLYER = 3;
+const HARD_MULTIPLIER = 3;
 
 export const addUserData = (email, user) => ({
   type: SEND_USER_DATA,
@@ -36,7 +36,7 @@ export const sendScoreThunk = (timer, dificult) => (dispatch) => {
     dispatch(sendScore(SUM_POINTS + (timer * 2)));
     break;
   case 'hard':
-    (sendScore(SUM_POINTS + (timer * HARD_MULTIPLYER)));
+    dispatch(sendScore(SUM_POINTS + (timer * HARD_MULTIPLIER)));
     break;
   default:
     break;

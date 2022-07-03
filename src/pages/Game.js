@@ -9,7 +9,7 @@ import Question from '../components/Question';
 
 class Game extends Component {
   state = {
-    countDown: 29,
+    countDown: 30,
     isClicked: false,
   }
 
@@ -27,11 +27,10 @@ class Game extends Component {
         clearInterval(setIntervalId);
       }
       if (countDown === 0) {
-        console.log('entrou');
         clearInterval(setIntervalId);
       }
     }), intervalMs);
-    this.setState({ isClicked: false, countDown: 29 });
+    this.setState({ isClicked: false, countDown: 30 });
   }
 
   handleTimer = () => this.setState({ isClicked: true })
