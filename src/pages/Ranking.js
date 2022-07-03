@@ -7,7 +7,7 @@ class Ranking extends Component {
     const { history } = this.props;
     return (
       <header>
-
+        <h1 data-testid="ranking-title">Ranking</h1>
         <section>
           <button
             type="button"
