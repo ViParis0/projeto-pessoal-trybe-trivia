@@ -74,12 +74,12 @@ describe('Testes da página Login', () => {
 
     userEvent.click(playBtn);
 
-    await waitFor(() => screen.getByRole('heading', {  name: /teste/i}));
+    await waitFor(() => screen.getByRole('heading', {  name: /test/i}));
 
     const url = history.location.pathname
 
     expect(url).toBe('/game');
-    history.push('/game')
-    expect(screen.getByRole('heading', {  name: /teste/i})).toBeInTheDocument()
+    // history.push('/game')
+    expect(screen.getByRole('heading', {  name: /test/i})).toBeInTheDocument()
   });
 });
