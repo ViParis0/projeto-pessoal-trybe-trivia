@@ -1,4 +1,4 @@
-import { GET_QUESTIONS, SEND_SCORE } from '../actions';
+import { CLEAR_STATE, GET_QUESTIONS, SEND_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -19,6 +19,10 @@ const gameReducer = (state = INITIAL_STATE, action) => {
     return { ...state,
       score: state.score + action.payload,
       assertions: state.assertions + 1,
+    };
+  case CLEAR_STATE:
+    return {
+      ...state,
     };
   default:
     return state;
