@@ -26,9 +26,11 @@ class Question extends Component {
     const question = questions[index];
     const incorrects = question.incorrect_answers
       .map((answer, i) => ({ answer, test: `wrong-answer-${i}`, class: 'incorrects' }));
-    const perguntas = [{ answer: question.correct_answer,
+    const perguntas = [{
+      answer: question.correct_answer,
       test: 'correct-answer',
-      class: 'correct' }, ...incorrects];
+      class: 'correct',
+    }, ...incorrects];
     perguntas.sort(() => Math.round(Math.random()) * 2 - 1);
     this.setState({ answers: perguntas });
   }
@@ -86,16 +88,16 @@ class Question extends Component {
               </button>
             )
           ))}
-          { showColor
-           && (
-             <button
-               onClick={ this.handleNext }
-               type="button"
-               data-testid="btn-next"
-             >
-               Next
-             </button>
-           )}
+          {showColor
+            && (
+              <button
+                onClick={ this.handleNext }
+                type="button"
+                data-testid="btn-next"
+              >
+                Next
+              </button>
+            )}
 
         </div>
       </div>

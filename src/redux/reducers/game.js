@@ -21,9 +21,7 @@ const gameReducer = (state = INITIAL_STATE, action) => {
       assertions: state.assertions + 1,
     };
   case CLEAR_STATE:
-    return {
-      ...state,
-    };
+    return INITIAL_STATE;
   default:
     return state;
   }
