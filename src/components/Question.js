@@ -13,8 +13,8 @@ class Question extends Component {
 
   async componentDidMount() {
     const { token, dispatch } = this.props;
-    this.result = await dispatch(fetchQuestionsThunk(token));
-    this.setState({ payload: this.result.payload });
+    const result = await dispatch(fetchQuestionsThunk(token));
+    this.setState({ payload: result.payload });
     this.randomize();
   }
   // teste

@@ -58,4 +58,4 @@ export const fetchTokenThunk = (email, user) => async (dispatch) => {
 
 export const fetchQuestionsThunk = (token) => (dispatch) => fetch(`https://opentdb.com/api.php?amount=5&token=${token}`)
   .then((response) => response.json())
-  .then((data) => dispatch(getQuestions(data.results)));
+  .then((data) => dispatch(getQuestions(data.results))).catch((e) => console.log(e));

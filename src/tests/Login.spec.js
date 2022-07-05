@@ -12,11 +12,6 @@ const INVALID_EMAIL = '123.com';
 const INVALID_USER = '';
 
 describe('Testes da página Login', () => {
-  // beforeAll(()=>{
-  //   global.fetch = jest.fn(async()=>({
-  //     json: async () => tokenResponse
-  //   }))
-  // })
   it('Verifica se a página contém os inputs de email e nome', () => {
     renderWithRouterAndRedux(<App />);
     const inputNameEl = screen.getByRole('textbox', { name: /nome/i });
@@ -79,7 +74,6 @@ describe('Testes da página Login', () => {
     const url = history.location.pathname
 
     expect(url).toBe('/game');
-    // history.push('/game')
     expect(screen.getByRole('heading', {  name: /test/i})).toBeInTheDocument()
   });
 });

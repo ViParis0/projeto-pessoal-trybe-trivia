@@ -45,7 +45,7 @@ class Game extends Component {
     return (
       <div>
         <Header />
-        <p>{countDown}</p>
+        <p data-testid="countdown-timer">{countDown}</p>
         <Question
           counter={ countDown }
           handleTimer={ this.handleTimer }
