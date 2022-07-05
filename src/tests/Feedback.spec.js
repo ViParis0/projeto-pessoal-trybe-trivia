@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 
 describe('Testes da página de Feedback', () => {
   it('Verifica se as informações do jogador são renderizadas na tela de Feedback', () => {
-    renderWithRouterAndRedux(<Feedback /> , {INITIAL_STATE});
+    renderWithRouterAndRedux(<Feedback /> , INITIAL_STATE);
 
     const player = screen.getByTestId('header-player-name')
     expect(player).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe('Testes da página de Feedback', () => {
   });
 
   it('Verifica se o score e os acertos são renderizados na tela de Feedback', () => {
-    renderWithRouterAndRedux(<Feedback /> , {INITIAL_STATE});
+    renderWithRouterAndRedux(<Feedback /> , INITIAL_STATE);
 
     const totalScore = screen.getByTestId('feedback-total-score');
     expect(totalScore).toBeInTheDocument();
@@ -42,6 +42,7 @@ describe('Testes da página de Feedback', () => {
     expect(history.location.pathname).toBe('/');
   });
 
+
   it('Verifica se o botão de ranking redireciona para a tela de Ranking', () => {
     const { history } = renderWithRouterAndRedux(<App /> , INITIAL_STATE, "/feedback" );
 
@@ -49,5 +50,21 @@ describe('Testes da página de Feedback', () => {
     userEvent.click(buttonRanking);
     expect(history.location.pathname).toBe('/Ranking');
   });
-  
+
+  it('Verifica se o botão de ranking redireciona para a tela de Ranking', () => {
+    const { history } = renderWithRouterAndRedux(<App /> , INITIAL_STATE, "/feedback" );
+
+    const buttonRanking = screen.getByTestId('btn-ranking');
+    userEvent.click(buttonRanking);
+    expect(history.location.pathname).toBe('/Ranking');
+  });
+
+  it('Verifica a mensagem caso o feedback seja negativo', () => {
+    renderWithRouterAndRedux(<App />, INITIAL_STATE, "/feedback")
+    const message = screen.getByRole('heading', {
+      name: /could be better\.\.\./i
+    })
+    expect(message).toBeInTheDocument();
+  });
+ 
 })

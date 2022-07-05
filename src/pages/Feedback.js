@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import { playAgain } from '../redux/actions';
 
 class Feedback extends Component {
-  rankingPlayers = async () => { // trabalhando aqui
+  rankingPlayers = async () => {
     const { history, players, user } = this.props;
     const playerRanking = {
       score: players.score,
@@ -24,7 +24,7 @@ class Feedback extends Component {
 
   playAgain = () => {
     const { history, dispatch } = this.props;
-    dispatch(playAgain()); // trabalhando aqui
+    dispatch(playAgain());
     history.push('/');
   }
 
@@ -58,7 +58,7 @@ class Feedback extends Component {
         <section>
           <button
             type="button"
-            onClick={ this.playAgain } // trabalhando aqui
+            onClick={ this.playAgain }
             data-testid="btn-play-again"
           >
             Play Again
@@ -88,8 +88,8 @@ Feedback.propTypes = {
 const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
-  players: state.player, // trabalhando aqui
-  user: state.user, // trabalhando aqui
+  players: state.player,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(Feedback);

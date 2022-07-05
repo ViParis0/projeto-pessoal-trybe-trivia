@@ -5,25 +5,15 @@ import { MD5 } from 'crypto-js';
 import { playAgain } from '../redux/actions';
 
 class Ranking extends Component {
-  // async componentDidMount() {
-  //   const { email } = this.props;
-  //   const HASH = md5(email).toString();
-  //   this.setState({ avatar: HASH });
-  // }
-
-  //   rankingList.sort(function(a, b){return a.score - b.score}); // organizar o array
-  // displayCars();
-
   playAgain = () => {
     const { history, dispatch } = this.props;
-    dispatch(playAgain()); // trabalhando aqui
+    dispatch(playAgain());
     history.push('/');
   }
 
   render() {
     const rankingList = JSON.parse(localStorage.getItem('rankingList'));
 
-    console.log(rankingList);
     return (
       <header>
         <h1 data-testid="ranking-title">Ranking</h1>
