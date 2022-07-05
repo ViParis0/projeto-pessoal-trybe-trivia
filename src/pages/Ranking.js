@@ -12,8 +12,15 @@ class Ranking extends Component {
   }
 
   render() {
+    if (!localStorage.getItem('rankingList')) {
+      const playerRanking = [{
+        score: 200,
+        name: 'Usuario Teste',
+        email: 'tester@email.com',
+      }];
+      localStorage.setItem('rankingList', JSON.stringify(playerRanking));
+    }
     const rankingList = JSON.parse(localStorage.getItem('rankingList'));
-
     return (
       <header>
         <h1 data-testid="ranking-title">Ranking</h1>
