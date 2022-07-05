@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllByTestId, screen, waitFor } from '@testing-library/react';
+import { getAllByTestId, getByTestId, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
@@ -108,9 +108,14 @@ describe('Testes da página Game', () => {
       renderWithRouterAndRedux(<App />, INITIAL_STATE, '/game');
       const timerEl = screen.getByTestId('countdown-timer');
       expect(timerEl.innerHTML).toBe('30');
-      // await waitFor(() => {
-      //   expect(screen.getByTestId('countdown-timer').innerHTML).toBe('0')
-      // })
+
+      jest.setTimeout(32000);
+      await new Promise((r) => setTimeout(r, 32000));
+
+      const correcBtn = screen.getByTestId('correct-answer')
+
+      expect(timerEl.innerHTML).toBe('0');
+      expect(correcBtn).toBeDisabled()
     })
 
 })
