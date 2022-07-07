@@ -18,16 +18,20 @@ class Game extends Component {
     this.setIntervalFunc();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.setIntervalId);
+  }
+
   setIntervalFunc = () => {
     const intervalMs = 1000;
-    const setIntervalId = setInterval(() => this.setState((prevState) => ({
+    this.setIntervalId = setInterval(() => this.setState((prevState) => ({
       countDown: prevState.countDown - 1 }), () => {
       const { countDown, isClicked } = this.state;
       if (isClicked) {
-        clearInterval(setIntervalId);
+        clearInterval(this.setIntervalId);
       }
       if (countDown === 0) {
-        clearInterval(setIntervalId);
+        clearInterval(this.setIntervalId);
       }
     }), intervalMs);
     this.setState({ isClicked: false, countDown: 30 });

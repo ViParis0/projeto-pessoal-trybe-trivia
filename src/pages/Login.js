@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -45,35 +46,40 @@ class Login extends React.Component {
 
   render() {
     const { email, user, isDisabled } = this.state;
-    // if (token) {
-    //   return <Redirect to="/game" />;
-    // }
     return (
-      <div>
+      <div className="conteiner">
         <form>
-          <label htmlFor="input-name">
-            Nome
-            <input
-              type="text"
-              name="user"
-              data-testid="input-player-name"
-              id="input-name"
-              onChange={ this.handleChange }
-              value={ user }
-            />
-          </label>
-          <label htmlFor="input-email">
-            Email
-            <input
-              type="email"
-              name="email"
-              data-testid="input-gravatar-email"
-              id="input-email"
-              onChange={ this.handleChange }
-              value={ email }
-            />
-          </label>
+          <div className="input-group mb-3">
+            <label htmlFor="input-name">
+              Nome
+              <input
+                className="form-control"
+                type="text"
+                name="user"
+                data-testid="input-player-name"
+                id="input-name"
+                onChange={ this.handleChange }
+                value={ user }
+              />
+            </label>
+          </div>
+          <div className="input-group mb-3">
+            <label htmlFor="input-email">
+              Email
+              <input
+                className="form-control"
+                type="email"
+                name="email"
+                data-testid="input-gravatar-email"
+                id="input-email"
+                onChange={ this.handleChange }
+                value={ email }
+              />
+
+            </label>
+          </div>
           <button
+            className="btn btn-primary"
             disabled={ isDisabled }
             type="button"
             data-testid="btn-play"
@@ -82,6 +88,7 @@ class Login extends React.Component {
             Play
           </button>
           <button
+            className="btn btn-secondary"
             type="button"
             data-testid="btn-settings"
             onClick={ this.handleSettings }
