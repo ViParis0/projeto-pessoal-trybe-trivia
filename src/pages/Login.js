@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchTokenThunk } from '../redux/actions';
+import triviaLogo from '../trivia.png';
 
 class Login extends React.Component {
   state = {
@@ -49,6 +50,7 @@ class Login extends React.Component {
     return (
       <div className="conteiner">
         <form>
+          <img src={ triviaLogo } alt="logo-trivia" width="500px" />
           <div className="input-group mb-3">
             <label htmlFor="input-name">
               Nome
