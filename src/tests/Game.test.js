@@ -73,7 +73,7 @@ describe('Testes da página Game', () => {
       }
 
       const pointsEl = screen.getByTestId('feedback-total-score')
-      expect(pointsEl.innerHTML).toBe('350')
+      expect(pointsEl.innerHTML).toBe('Score: 350')
     })
 
     it('Verifica se os pontos não são somados quando erra a resposta', async () => {
@@ -107,14 +107,14 @@ describe('Testes da página Game', () => {
     it('Verifica se o timer é iniciado ao entrar na pág e para ao chegar em 0', async ()=> {
       renderWithRouterAndRedux(<App />, INITIAL_STATE, '/game');
       const timerEl = screen.getByTestId('countdown-timer');
-      expect(timerEl.innerHTML).toBe('30');
+      expect(timerEl.innerHTML).toBe('Question timer: 30');
 
       jest.setTimeout(32000);
       await new Promise((r) => setTimeout(r, 32000));
 
       const correcBtn = screen.getByTestId('correct-answer')
 
-      expect(timerEl.innerHTML).toBe('0');
+      expect(timerEl.innerHTML).toBe('Question timer: 0');
       expect(correcBtn).toBeDisabled()
     })
 
