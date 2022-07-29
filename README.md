@@ -1,4 +1,4 @@
-# Este é meu Trivia, desenvolvido na Trybe
+# Este é meu projeto Trivia, desenvolvido na Trybe
 
 ## Alguns comentários
 
