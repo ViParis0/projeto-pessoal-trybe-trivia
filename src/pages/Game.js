@@ -49,13 +49,20 @@ class Game extends Component {
     return (
       <div>
         <Header />
-        <p data-testid="countdown-timer">{countDown}</p>
-        <Question
-          counter={ countDown }
-          handleTimer={ this.handleTimer }
-          setIntervalFunc={ this.setIntervalFunc }
-          history={ history }
-        />
+        <div className="game-conteiner">
+          <p
+            data-testid="countdown-timer"
+            id="countdown"
+          >
+            {`Question timer: ${countDown}`}
+          </p>
+          <Question
+            counter={ countDown }
+            handleTimer={ this.handleTimer }
+            setIntervalFunc={ this.setIntervalFunc }
+            history={ history }
+          />
+        </div>
       </div>
     );
   }

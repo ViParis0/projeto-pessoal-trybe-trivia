@@ -32,50 +32,57 @@ class Feedback extends Component {
     const minAcertos = 3;
     const { assertions, score } = this.props;
     return (
-      <header>
-        <section>
-          <Header />
-        </section>
-        <section>
-          {
-            assertions < minAcertos ? (
-              <h1 data-testid="feedback-text">Could be better...</h1>
-            ) : (
-              <h1 data-testid="feedback-text">Well Done!</h1>
-            )
-          }
-        </section>
+      <>
+        <Header />
+        <div className="game-conteiner">
+          {assertions < minAcertos ? (
+            <h1
+              data-testid="feedback-text"
+              className="question-category"
+            >
+              Could be better...
 
-        <section>
-          <h1 data-testid="feedback-total-score">
-            { score }
-          </h1>
-          <p data-testid="feedback-total-question">
-            { assertions }
-          </p>
-        </section>
+            </h1>
+          ) : (
+            <h1 data-testid="feedback-text" className="question-category">Well Done!</h1>
+          )}
 
-        <section>
-          <button
-            type="button"
-            onClick={ this.playAgain }
-            data-testid="btn-play-again"
-          >
-            Play Again
-          </button>
-        </section>
+          <section>
+            <h1 data-testid="feedback-total-score" className="question-category">
+              Score:
+              {' '}
+              { score }
+            </h1>
+            <p data-testid="feedback-total-question" className="question-category">
+              Assertions:
+              {' '}
+              { assertions }
+            </p>
+          </section>
 
-        <section>
-          <button
-            type="button"
-            onClick={ this.rankingPlayers }
-            data-testid="btn-ranking"
-          >
-            Ranking
-          </button>
-        </section>
+          <section>
+            <button
+              className="btn btn-light"
+              type="button"
+              onClick={ this.playAgain }
+              data-testid="btn-play-again"
+            >
+              Play Again
+            </button>
+          </section>
 
-      </header>
+          <section>
+            <button
+              className="btn btn-light"
+              type="button"
+              onClick={ this.rankingPlayers }
+              data-testid="btn-ranking"
+            >
+              Ranking
+            </button>
+          </section>
+        </div>
+      </>
     );
   }
 }

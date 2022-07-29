@@ -25,11 +25,13 @@ class Question extends Component {
     const { index } = this.state;
     const question = questions[index];
     const incorrects = question.incorrect_answers
-      .map((answer, i) => ({ answer, test: `wrong-answer-${i}`, class: 'incorrects' }));
+      .map((answer, i) => ({ answer,
+        test: `wrong-answer-${i}`,
+        class: 'btn btn-danger' }));
     const perguntas = [{
       answer: question.correct_answer,
       test: 'correct-answer',
-      class: 'correct',
+      class: 'btn btn-success',
     }, ...incorrects];
     perguntas.sort(() => Math.round(Math.random()) * 2 - 1);
     this.setState({ answers: perguntas });
@@ -54,7 +56,7 @@ class Question extends Component {
     const { index, payload } = this.state;
     this.setState({ showColor: true });
     handleTimer();
-    if (answer === 'correct') {
+    if (answer === 'correct-answer') {
       dispatch(sendScoreThunk(counter, payload[index].difficulty));
     }
   }
@@ -66,22 +68,26 @@ class Question extends Component {
       this.setState({ showColor: true });
     }
     return (
-      <div>
-        <h4 data-testid="question-category">
-          {payload[index] && payload[index].category}
-        </h4>
-        <h4 data-testid="question-text">
-          {payload[index] && payload[index].question}
-        </h4>
-        <div data-testid="answer-options">
+      <div className="question-conteiner">
+        <div className="question-category">
+          <h4 data-testid="question-category">
+            {payload[index] && payload[index].category}
+          </h4>
+        </div>
+        <div className="question-text">
+          <h4 data-testid="question-text">
+            {payload[index] && payload[index].question}
+          </h4>
+        </div>
+        <div data-testid="answer-options" className="answer-questions">
           {answers.length && answers.map((quest, i) => (
             (
               <button
                 key={ i + 1 }
                 type="button"
                 data-testid={ quest.test }
-                className={ showColor ? quest.class : 'none' }
-                onClick={ () => this.handleClick(quest.class) }
+                className={ showColor ? quest.class : 'btn btn-primary' }
+                onClick={ () => this.handleClick(quest.test) }
                 disabled={ showColor }
               >
                 {quest.answer}
@@ -91,6 +97,7 @@ class Question extends Component {
           {showColor
             && (
               <button
+                className="btn btn-light"
                 onClick={ this.handleNext }
                 type="button"
                 data-testid="btn-next"

@@ -22,26 +22,38 @@ class Ranking extends Component {
     }
     const rankingList = JSON.parse(localStorage.getItem('rankingList'));
     return (
-      <header>
-        <h1 data-testid="ranking-title">Ranking</h1>
+      <header className="ranking-conteiner">
+        <h1 data-testid="ranking-title" className="question-category">Ranking</h1>
         {rankingList.map((scorePlayer, index) => (
           <div key={ index }>
-            <h3 data-testid={ `player-score-${index}` } key={ index }>
-              { scorePlayer.score }
-            </h3>
-            <h3 data-testid={ `player-name-${index}` } key={ index }>
+            <div className="question-category">
+              <img
+                src={ `https://www.gravatar.com/avatar/${MD5(scorePlayer.email).toString()}` }
+                alt="profile"
+                data-testid="header-profile-picture"
+              />
+            </div>
+            <h3
+              data-testid={ `player-name-${index}` }
+              className="question-category"
+              key={ index }
+            >
               { scorePlayer.name }
             </h3>
-            <img
-              src={ `https://www.gravatar.com/avatar/${MD5(scorePlayer.email).toString()}` }
-              alt="profile"
-              data-testid="header-profile-picture"
-            />
+            <h3
+              data-testid={ `player-score-${index}` }
+              className="question-category"
+              key={ index }
+            >
+              { scorePlayer.score }
+            </h3>
+            <hr className="new1" />
           </div>
         ))}
 
         <section>
           <button
+            className="btn btn-light"
             type="button"
             onClick={ this.playAgain }
             data-testid="btn-go-home"
